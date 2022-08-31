@@ -2,6 +2,7 @@ from midi import Staff
 from midi import Note
 from midi import midiInput
 import pygame  
+from UI import Button
 class noteIdentification:
     
     def __init__(self,surf) :
@@ -11,8 +12,12 @@ class noteIdentification:
         self._display_surf = surf
         self.staff = Staff.Staff(surf)
         self.staff.writeNote(self.noteToHit)
+        self.backBtn = Button.Button(surf,"back to main menu","backToMain",(500,50),(200,50))
+    def cleanUp(self):
+        self.midiinp.disconnect()
     def update(self):
         data= self.midiinp.getEvent()
+        self.backBtn.update()
         (event,pitch,octave,speed) = data
            
         if (event == "KEY_DOWN"):
@@ -24,7 +29,7 @@ class noteIdentification:
     def render(self):
         
         self._display_surf.fill((255,255,255))
-       
+        self.backBtn.render()
         self.staff.draw()
 
         pass

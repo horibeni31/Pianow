@@ -17,7 +17,9 @@ class MidiKeboard:
       
 
         pass
-
+    def disconnect(self):
+        pygame.midi.quit()
+        del self.i
     def getEvent(self):
         if self.i.poll():
             midi_events = self.i.read(1)[0]
