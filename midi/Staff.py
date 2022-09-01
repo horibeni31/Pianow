@@ -47,10 +47,10 @@ class Staff:
     def drawNote(self, n):
         c4_pos =starty+gap*4.5
         octave = int(n.octave)
-        note = int(lookup.index(n.pitch))
+        note = int(lookup.index(n.pitch[0]))
         notePos = c4_pos-(0.5*gap*note+(octave-5)*7*0.5*gap);
-        if(len(n) ==3):
-            if n[2] == '#':
+        if(len(n.pitch) ==2):
+            if n.pitch[1] == '#':
                 self._display_surf.blit(self.sharp,(90,notePos-gap/3))
             
 

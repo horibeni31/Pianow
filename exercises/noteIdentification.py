@@ -12,7 +12,7 @@ class noteIdentification:
         self._display_surf = surf
         self.staff = Staff.Staff(surf)
         self.staff.writeNote(self.noteToHit)
-        self.backBtn = Button.Button(surf,"back to main menu","backToMain",(500,50),(200,50))
+        self.backBtn = Button.Button(surf,"back to main menu","backToMain",(50,500),(200,50))
     def cleanUp(self):
         self.midiinp.disconnect()
     def update(self):
