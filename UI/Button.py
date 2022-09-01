@@ -1,5 +1,3 @@
-from cmath import rect
-from multiprocessing import Event
 import pygame 
 import events
 class Button:

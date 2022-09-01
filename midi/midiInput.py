@@ -1,4 +1,3 @@
-from multiprocessing import Event
 import pygame 
 import pygame.midi
 import events

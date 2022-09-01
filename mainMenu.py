@@ -1,4 +1,3 @@
-from os import system
 import pygame
 from exercises import noteIdentification
 from UI import Button

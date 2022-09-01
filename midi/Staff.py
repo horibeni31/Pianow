@@ -1,5 +1,3 @@
-
-
 import pygame
 lookup = ["C","D","E","F","G","A","B"]
 startx = 50
