@@ -1,6 +1,3 @@
-import imp
-
-
 import pygame
-
 BUTTON_CLICKED=pygame.USEREVENT+1
+MIDI_EVENT=pygame.USEREVENT+2

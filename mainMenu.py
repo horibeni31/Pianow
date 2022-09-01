@@ -2,14 +2,18 @@ from os import system
 import pygame
 from exercises import noteIdentification
 from UI import Button
+import midi.midiInput
 import events
 class mainMenu:
     def __init__(self):
         pygame.init()
+        pygame.midi.init()
         pygame.font.init() 
         self.running = True
         self.size = self.weight, self.height = 1920, 1080
         self.currentExercise = None
+        self.midiInp = midi.midiInput.MidiKeboard()
+        self.midiInp.connect()
         self.surf = pygame.display.set_mode(self.size,pygame.RESIZABLE)
         self.exitbtn = Button.Button(self.surf,"exit","exit",(50,50),(200,50))
         self.startNI = Button.Button(self.surf,"NoteIdentification","startNI",(50,150),(200,50))
@@ -24,7 +28,12 @@ class mainMenu:
             if event.name == "backToMain":
                 self.currentExercise.cleanUp()
                 self.currentExercise = None
+        if event.type == events.MIDI_EVENT:
+            if self.currentExercise:
+               self.currentExercise.handle_midiEvent(event)
+            pass
     def update(self):
+        self.midiInp.update()
         if(self.currentExercise == None):
             self.exitbtn.update()
             self.startNI.update()
