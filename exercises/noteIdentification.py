@@ -40,7 +40,7 @@ class noteIdentification:
     def update(self):
         self.backBtn.update()
         self.errorText = self.font.render("errors: "+str(self.errors), True, (0,0,0))
-        self.passedText = self.font.render("errors: "+str(self.notesPassed), True, (0,0,0))
+        self.passedText = self.font.render("passed notes: "+str(self.notesPassed), True, (0,0,0))
         if(self.noteHit):
             self.noteHit = False
             self.notesPassed +=1
