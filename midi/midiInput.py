@@ -1,6 +1,7 @@
 import pygame 
 import pygame.midi
 import events
+from midi import Note
 lookup = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B",]
 
 
@@ -29,7 +30,7 @@ class MidiKeboard:
                 event = "KEY_UP" if speed == 0 else "KEY_DOWN"
                 note = lookup[key % 12]
                 octave = int(str(int(key/12)))
-                pygame.event.post(pygame.event.Event(events.MIDI_EVENT,action=event,note=note+str(octave)))
+                pygame.event.post(pygame.event.Event(events.MIDI_EVENT,action=event,key=(note,octave)))
 
 
 

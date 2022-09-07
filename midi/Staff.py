@@ -16,22 +16,13 @@ class Staff:
     def writeNote(self,note):
         self.staffNotes.append(note)
     def RemNote(self, note):
-        i = 0
-        for a in self.staffNotes:
-            if a.pitch ==note.pitch and a.octave == note.octave and a.press:
-                break
-            i = i+1
-        self.staffNotes.pop(i)
+        
+        self.staffNotes.remove(note)
     def keyDown(self, note):
         self.pressedNotes.append(note)
         pass
     def keyUp(self,note):
-        i = 0
-        for a in self.pressedNotes:
-            if a.pitch ==note.pitch and a.octave == note.octave and a.press:
-                break
-            i = i+1
-        self.pressedNotes.pop(i)
+        self.pressedNotes.remove(note)
         
     def draw(self, type="GRANDSTAFF"):
         self.draw_grandStaff()
@@ -45,10 +36,10 @@ class Staff:
     def drawNote(self, n):
         c4_pos =starty+gap*4.5
         octave = int(n.octave)
-        note = int(lookup.index(n.pitch[0]))
+        note = int(lookup.index(n.note[0]))
         notePos = c4_pos-(0.5*gap*note+(octave-5)*7*0.5*gap);
-        if(len(n.pitch) ==2):
-            if n.pitch[1] == '#':
+        if(len(n.note) ==2):
+            if n.note[1] == '#':
                 self._display_surf.blit(self.sharp,(90,notePos-gap/3))
             
 
