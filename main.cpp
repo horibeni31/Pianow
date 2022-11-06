@@ -2,12 +2,18 @@
 //! [main program]
 #include <QtWidgets>
 
+#include <rtmidi/RtMidi.h>
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     QWidget window;
     window.setFixedSize(1000, 500);
-    
+      try {
+    RtMidiIn midiin;
+  } catch (RtMidiError &error) {
+    // Handle the exception here
+    error.printMessage();
+  }
     
 
 //! [create, position and show]
