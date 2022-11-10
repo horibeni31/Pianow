@@ -1,31 +1,18 @@
 
-//! [main program]
-#include <QtWidgets>
-
-#include <rtmidi/RtMidi.h>
-int main(int argc, char *argv[])
+#include <iostream>
+#include <cstdlib>
+#include <qapplication.h>
+#include <signal.h>
+#include "rtmidi/RtMidi.h"
+#include<unistd.h>  
+#include <QApplication>
+#include "mainWindow.h"
+int main(int argc ,char* argv[])
 {
-    QApplication app(argc, argv);
-    QWidget window;
-    window.setFixedSize(1000, 500);
-      try {
-    RtMidiIn midiin;
-  } catch (RtMidiError &error) {
-    // Handle the exception here
-    error.printMessage();
-  }
-    
-
-//! [create, position and show]
-    QPushButton *button = new QPushButton("Note indentification", &window);
-    button->setGeometry(10, 10, 300, 80);
-
-     QPushButton *button2 = new QPushButton("Chord indentification", &window);
-    button2->setGeometry(10, 100, 300, 80);
-    window.show();
+  QApplication app(argc,argv);
 
 
-//! [create, position and show]
-    return app.exec();
+MainWindow* mw = new MainWindow();
+mw->show();
+  return app.exec();
 }
-//! [main program]
