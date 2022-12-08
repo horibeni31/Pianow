@@ -17,9 +17,14 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 
 add_executable(Pianow main.cpp 
-                      mainWindow.cpp
-                      noteIdentification.cpp
-                      midiController.cpp
+                      widgets/mainWindow.cpp
+                      widgets/staff.cpp
+                      exercises/noteIdentification.cpp
+                      exercises/exercise.cpp
+                      midi/midiController.cpp
+                      midi/midiMessage.cpp
+                      midi/note.cpp
+                      
                         )
 
 target_link_libraries(Pianow PUBLIC Qt5::Widgets rtmidi)

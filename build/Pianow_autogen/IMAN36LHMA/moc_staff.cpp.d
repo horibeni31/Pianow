@@ -1,10 +1,5 @@
-/home/hb/Documents/repos/Pianow/build/Pianow_autogen/EWIEGA46WW/moc_mainWindow.cpp: /home/hb/Documents/repos/Pianow/mainWindow.h \
+/home/hb/Documents/repos/Pianow/build/Pianow_autogen/IMAN36LHMA/moc_staff.cpp: /home/hb/Documents/repos/Pianow/widgets/staff.h \
   /home/hb/Documents/repos/Pianow/build/Pianow_autogen/moc_predefs.h \
-  /home/hb/Documents/repos/Pianow/exercises/exercise.h \
-  /home/hb/Documents/repos/Pianow/exercises/noteIdentification.h \
-  /home/hb/Documents/repos/Pianow/midi/midiController.h \
-  /home/hb/Documents/repos/Pianow/midi/midiMessage.h \
-  /home/hb/Documents/repos/Pianow/midi/note.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/asm/errno.h \
@@ -89,7 +84,6 @@
   /usr/include/c++/12.2.0/bits/cpp_type_traits.h \
   /usr/include/c++/12.2.0/bits/cxxabi_forced.h \
   /usr/include/c++/12.2.0/bits/cxxabi_init_exception.h \
-  /usr/include/c++/12.2.0/bits/deque.tcc \
   /usr/include/c++/12.2.0/bits/erase_if.h \
   /usr/include/c++/12.2.0/bits/exception.h \
   /usr/include/c++/12.2.0/bits/exception_defines.h \
@@ -99,7 +93,6 @@
   /usr/include/c++/12.2.0/bits/hash_bytes.h \
   /usr/include/c++/12.2.0/bits/invoke.h \
   /usr/include/c++/12.2.0/bits/ios_base.h \
-  /usr/include/c++/12.2.0/bits/istream.tcc \
   /usr/include/c++/12.2.0/bits/iterator_concepts.h \
   /usr/include/c++/12.2.0/bits/list.tcc \
   /usr/include/c++/12.2.0/bits/locale_classes.h \
@@ -138,7 +131,6 @@
   /usr/include/c++/12.2.0/bits/stl_algobase.h \
   /usr/include/c++/12.2.0/bits/stl_bvector.h \
   /usr/include/c++/12.2.0/bits/stl_construct.h \
-  /usr/include/c++/12.2.0/bits/stl_deque.h \
   /usr/include/c++/12.2.0/bits/stl_function.h \
   /usr/include/c++/12.2.0/bits/stl_heap.h \
   /usr/include/c++/12.2.0/bits/stl_iterator.h \
@@ -149,7 +141,6 @@
   /usr/include/c++/12.2.0/bits/stl_multimap.h \
   /usr/include/c++/12.2.0/bits/stl_numeric.h \
   /usr/include/c++/12.2.0/bits/stl_pair.h \
-  /usr/include/c++/12.2.0/bits/stl_queue.h \
   /usr/include/c++/12.2.0/bits/stl_raw_storage_iter.h \
   /usr/include/c++/12.2.0/bits/stl_relops.h \
   /usr/include/c++/12.2.0/bits/stl_tempbuf.h \
@@ -180,7 +171,6 @@
   /usr/include/c++/12.2.0/cwctype \
   /usr/include/c++/12.2.0/debug/assertions.h \
   /usr/include/c++/12.2.0/debug/debug.h \
-  /usr/include/c++/12.2.0/deque \
   /usr/include/c++/12.2.0/exception \
   /usr/include/c++/12.2.0/ext/aligned_buffer.h \
   /usr/include/c++/12.2.0/ext/alloc_traits.h \
@@ -193,8 +183,6 @@
   /usr/include/c++/12.2.0/initializer_list \
   /usr/include/c++/12.2.0/ios \
   /usr/include/c++/12.2.0/iosfwd \
-  /usr/include/c++/12.2.0/iostream \
-  /usr/include/c++/12.2.0/istream \
   /usr/include/c++/12.2.0/iterator \
   /usr/include/c++/12.2.0/limits \
   /usr/include/c++/12.2.0/list \
@@ -208,7 +196,6 @@
   /usr/include/c++/12.2.0/pstl/glue_algorithm_defs.h \
   /usr/include/c++/12.2.0/pstl/glue_memory_defs.h \
   /usr/include/c++/12.2.0/pstl/glue_numeric_defs.h \
-  /usr/include/c++/12.2.0/queue \
   /usr/include/c++/12.2.0/stdexcept \
   /usr/include/c++/12.2.0/stdlib.h \
   /usr/include/c++/12.2.0/streambuf \
@@ -239,7 +226,6 @@
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/pthread.h \
-  /usr/include/qt/QtCore/QObject \
   /usr/include/qt/QtCore/qalgorithms.h \
   /usr/include/qt/QtCore/qarraydata.h \
   /usr/include/qt/QtCore/qatomic.h \
@@ -302,7 +288,6 @@
   /usr/include/qt/QtGui/qfont.h \
   /usr/include/qt/QtGui/qfontinfo.h \
   /usr/include/qt/QtGui/qfontmetrics.h \
-  /usr/include/qt/QtGui/qicon.h \
   /usr/include/qt/QtGui/qimage.h \
   /usr/include/qt/QtGui/qkeysequence.h \
   /usr/include/qt/QtGui/qmatrix.h \
@@ -318,19 +303,10 @@
   /usr/include/qt/QtGui/qtguiglobal.h \
   /usr/include/qt/QtGui/qtransform.h \
   /usr/include/qt/QtGui/qwindowdefs.h \
-  /usr/include/qt/QtWidgets/QDialog \
-  /usr/include/qt/QtWidgets/QMainWindow \
-  /usr/include/qt/QtWidgets/QPushButton \
-  /usr/include/qt/QtWidgets/qabstractbutton.h \
-  /usr/include/qt/QtWidgets/qdialog.h \
-  /usr/include/qt/QtWidgets/qmainwindow.h \
-  /usr/include/qt/QtWidgets/qpushbutton.h \
   /usr/include/qt/QtWidgets/qsizepolicy.h \
-  /usr/include/qt/QtWidgets/qtabwidget.h \
   /usr/include/qt/QtWidgets/qtwidgets-config.h \
   /usr/include/qt/QtWidgets/qtwidgetsglobal.h \
   /usr/include/qt/QtWidgets/qwidget.h \
-  /usr/include/rtmidi/RtMidi.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
   /usr/include/string.h \

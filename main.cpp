@@ -6,7 +6,8 @@
 #include "rtmidi/RtMidi.h"
 #include<unistd.h>  
 #include <QApplication>
-#include "mainWindow.h"
+#include "exercises/noteIdentification.h"
+#include "widgets/mainWindow.h"
 int main(int argc ,char* argv[])
 {
   QApplication app(argc,argv);

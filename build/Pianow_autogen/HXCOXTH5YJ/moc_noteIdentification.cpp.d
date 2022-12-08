@@ -1,10 +1,10 @@
-/home/hb/Documents/repos/Pianow/build/Pianow_autogen/EWIEGA46WW/moc_mainWindow.cpp: /home/hb/Documents/repos/Pianow/mainWindow.h \
+/home/hb/Documents/repos/Pianow/build/Pianow_autogen/HXCOXTH5YJ/moc_noteIdentification.cpp: /home/hb/Documents/repos/Pianow/exercises/noteIdentification.h \
   /home/hb/Documents/repos/Pianow/build/Pianow_autogen/moc_predefs.h \
   /home/hb/Documents/repos/Pianow/exercises/exercise.h \
-  /home/hb/Documents/repos/Pianow/exercises/noteIdentification.h \
   /home/hb/Documents/repos/Pianow/midi/midiController.h \
   /home/hb/Documents/repos/Pianow/midi/midiMessage.h \
   /home/hb/Documents/repos/Pianow/midi/note.h \
+  /home/hb/Documents/repos/Pianow/widgets/staff.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/asm/errno.h \
