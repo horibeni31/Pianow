@@ -16,6 +16,7 @@ class NoteIdentification: public QMainWindow
 
     Q_OBJECT
 private:
+
     QPushButton *button;
     QImage image;
 public:

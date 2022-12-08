@@ -16,7 +16,11 @@ find_package(Qt5 REQUIRED COMPONENTS Widgets)
 
 
 
-add_executable(Pianow main.cpp mainWindow.cpp noteIdentification.cpp)
+add_executable(Pianow main.cpp 
+                      mainWindow.cpp
+                      noteIdentification.cpp
+                      midiController.cpp
+                        )
 
 target_link_libraries(Pianow PUBLIC Qt5::Widgets rtmidi)
 set(DCMAKE_EXPORT_COMPILE_COMMANDS ON)
