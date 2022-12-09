@@ -20,18 +20,10 @@ class NoteIdentification : public QMainWindow, public Exercise {
 private:
   QPushButton *button;
   Staff* staff;
-  std::vector<Note> pressedNotes;
 
 public:
   NoteIdentification();
   void HandleMidiMessage(MidiMessage m) override;
-  void Start();
-private:
-void Listen();
-
-protected:
-private slots:
-  void asd(){};
 };
 
 #endif

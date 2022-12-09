@@ -29,24 +29,17 @@ void MidiController::midi_event_handler(double deltatime,
                                         void *userData) {
   unsigned int nBytes = message->size();
   if ((int)message->at(0) == 144) { // key event
-    int key = message->at(1) + 3;
+    int key = message->at(1) ;
 
-    char pitch = lookup[key % 12];
-    int octave = key / 12 - 1;
-    //  std::cout << pitch << "," << octave << std::endl;
     bool pressed = message->at(2) != 0;
     if (currExercise) {
 
       currExercise->HandleMidiMessage(
-          MidiMessage(Note(pitch, octave), pressed));
+          MidiMessage(Note::getNote(key), pressed));
     
-    std::cout<<"calling"<<std::endl;
     }
   }
-  // for (unsigned int i = 0; i < nBytes; i++)
-  //   std::cout << "Byte " << i << " = " << (int)message->at(i) << ", ";
-  // if (nBytes > 0)
-  //   std::cout << "stamp = " << deltatime << std::endl;
+ 
 }
 
 bool MidiController::getMessage(MidiMessage &message) {

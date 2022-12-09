@@ -1,5 +1,6 @@
 /home/hb/Documents/repos/Pianow/build/Pianow_autogen/IMAN36LHMA/moc_staff.cpp: /home/hb/Documents/repos/Pianow/widgets/staff.h \
   /home/hb/Documents/repos/Pianow/build/Pianow_autogen/moc_predefs.h \
+  /home/hb/Documents/repos/Pianow/midi/note.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/asm/errno.h \

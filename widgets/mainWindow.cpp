@@ -30,7 +30,7 @@ void MainWindow::exercise_note_identification() {
    midiController->currExercise=this->exercise;
 
     this->exercise->show();
-    this->exercise->Start();
+    
    
 
 }

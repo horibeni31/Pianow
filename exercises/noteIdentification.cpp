@@ -7,6 +7,7 @@
 #include <QImage>
 #include <QPaintEvent>
 #include <QPainter>
+#include <algorithm>
 #include <iostream>
 #include <pstl/glue_algorithm_defs.h>
 #include <qcolor.h>
@@ -16,40 +17,29 @@
 #include <qpen.h>
 #include <qpoint.h>
 #include <qwindowdefs.h>
-#include <vector>
-#include <thread>
-#include <algorithm>
 #include <string>
+#include <thread>
+#include <vector>
 
-NoteIdentification::NoteIdentification():QMainWindow(),staff(new Staff(this)) {
+NoteIdentification::NoteIdentification()
+    : QMainWindow(), staff(new Staff(this)) {
   this->button = new QPushButton("Hello there");
   setCentralWidget(staff);
-  this->pressedNotes = std::vector<Note>();
   //  this->setCentralWidget(image);
-resize(500,500);
-  staff->drawStaff();
+  resize(500, 500);
+  
 }
 
-void NoteIdentification::Start() {
- //std::thread listenThread(&NoteIdentification::Listen,this);
-}
-void NoteIdentification::HandleMidiMessage(MidiMessage m){
- if(m.pressed){
-        pressedNotes.push_back(m.note);
-        
-      }else {
-      pressedNotes.erase(std::remove(pressedNotes.begin(),pressedNotes.end(),m.note));
-      }
-      std::cout<<m.note.octave<<", "<<m.note.pitch<<std::endl;
-      staff->drawStaff();
-}
-void NoteIdentification::Listen(){
-  MidiMessage m;
- while (true) {
-  
-    if(MidiController::getMessage(m)){
-     
-    }
+
+void NoteIdentification::HandleMidiMessage(MidiMessage m) {
+  if (m.pressed) {
+std::cout<<m.note.pitch<<","<<m.note.accidental<<","<<m.note.octave<<std::endl;
+    this->staff->AddNote(m.note);
+
+  } else {
+    this->staff->RemoveNote(m.note);
+    // pressedNotes.erase(std::remove(pressedNotes.begin(),pressedNotes.end(),m.note));
   }
+ // std::cout << m.note.octave << ", " << m.note.pitch << std::endl;
 
 }
