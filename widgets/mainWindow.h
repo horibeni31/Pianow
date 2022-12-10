@@ -2,32 +2,32 @@
 #define MAINWINDOW_H
 #include "exercises/noteIdentification.h"
 #include "midi/midiController.h"
+#include <QDialog>
 #include <QMainWindow>
+#include <QPushButton>
 #include <qdialog.h>
 #include <qevent.h>
-#include <qwindowdefs.h>
-#include <QDialog>
+#include <qgroupbox.h>
 #include <qmainwindow.h>
-#include <QPushButton>
 #include <qobjectdefs.h>
 #include <qpushbutton.h>
 #include <qwidget.h>
+#include <qwindowdefs.h>
 
-class MainWindow: public QMainWindow{
-  
-Q_OBJECT
+class MainWindow : public QMainWindow {
+
+  Q_OBJECT
 private:
-    MidiController* midiController;
-QPushButton* _btn_note_identification;
-QPushButton* _btn_exit;
-NoteIdentification* exercise;
+  MidiController *midiController;
+  QPushButton *_btn_note_identification;
+  QPushButton *_btn_exit;
+  NoteIdentification *exercise;
+  QGroupBox* groupBox;
 
 public:
-MainWindow();
+  MainWindow();
 private slots:
-void exercise_note_identification();
-
-
+  void exercise_note_identification();
 };
 
 #endif

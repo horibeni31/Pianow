@@ -20,10 +20,11 @@ class NoteIdentification : public QMainWindow, public Exercise {
 private:
   QPushButton *button;
   Staff* staff;
-
+  Note goal;
 public:
   NoteIdentification();
   void HandleMidiMessage(MidiMessage m) override;
+  Note GenerateRandomNote();
 };
 
 #endif
