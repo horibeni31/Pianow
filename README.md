@@ -1,11 +1,18 @@
 # Pianow
-A piano learning app written in python-pygame
+A piano learning app 
+## Dependencies
+- rtmidi
+- qt5
 ## Installing
+# Linux
 ```
-pip install -r requirements.txt
+mkdir build
+cd build
+cmake ..
+cmake --build .
 
 ```
 ## Running 
 ```
-python3 main.py
+build/Pianow
 ```
