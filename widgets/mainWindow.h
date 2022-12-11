@@ -20,6 +20,8 @@ class MainWindow : public QMainWindow {
 private:
   MidiController *midiController;
   QPushButton *_btn_note_identification;
+  QPushButton *_btn_chord_identification;
+  QPushButton *_btn_keySigniture_identification;
   QPushButton *_btn_exit;
   NoteIdentification *exercise;
   QGroupBox* groupBox;

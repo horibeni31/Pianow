@@ -13,24 +13,35 @@ MainWindow::MainWindow() {
   this->_btn_exit = new QPushButton("exit", this);
 
   this->_btn_note_identification = new QPushButton("Note Identification", this);
+  this->_btn_chord_identification = new QPushButton("Chord Identification", this);
+  
+  this->_btn_keySigniture_identification = new QPushButton("Key signiture Identification", this);
 
   this->exercise = nullptr;
   this->groupBox = new QGroupBox();
+  
+  _btn_chord_identification->setEnabled(false);
+  _btn_keySigniture_identification->setEnabled(false);
   QVBoxLayout *layout = new QVBoxLayout();
-  layout->addWidget(_btn_exit);
   layout->addWidget(_btn_note_identification);
+  layout->addWidget(_btn_chord_identification);
+  layout->addWidget(_btn_keySigniture_identification);
+  layout->addWidget(_btn_exit);
   groupBox->setLayout(layout);
+  groupBox->setContentsMargins(100,100,100,100);
   MidiController::Init();
-  MidiController::Connect(0);
+  MidiController::Connect(0);//TODO
 setCentralWidget(groupBox);
   connect(_btn_exit, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
   connect(_btn_note_identification, SIGNAL(clicked()), this,
           SLOT(exercise_note_identification()));
 }
 void MainWindow::exercise_note_identification() {
+if(!this->exercise){
 
   this->exercise = new NoteIdentification();
   midiController->currExercise = this->exercise;
 
   this->exercise->show();
+}
 }

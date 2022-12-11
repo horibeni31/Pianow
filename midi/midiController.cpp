@@ -20,26 +20,28 @@ void MidiController::Init() {
 }
 
 void MidiController::Connect(int port) {
+  if(rtmidiin->getPortCount()>0){
+
   rtmidiin->openPort(port);
   rtmidiin->ignoreTypes(false, true, true);
   rtmidiin->setCallback(&midi_event_handler);
+  }else {
+  std::cout<<"No midi device found."<<std::endl;
+  }
 }
 void MidiController::midi_event_handler(double deltatime,
                                         std::vector<unsigned char> *message,
                                         void *userData) {
   unsigned int nBytes = message->size();
   if ((int)message->at(0) == 144) { // key event
-    int key = message->at(1) ;
+    int key = message->at(1);
 
     bool pressed = message->at(2) != 0;
     if (currExercise) {
 
-      currExercise->HandleMidiMessage(
-          MidiMessage(Note::getNote(key), pressed));
-    
+      currExercise->HandleMidiMessage(MidiMessage(Note::getNote(key), pressed));
     }
   }
- 
 }
 
 bool MidiController::getMessage(MidiMessage &message) {
