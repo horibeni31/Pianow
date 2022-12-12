@@ -21,6 +21,7 @@ configure_file("treble.png" "treble.png" COPYONLY)
 add_executable(Pianow main.cpp 
                       widgets/mainWindow.cpp
                       widgets/staff.cpp
+                      widgets/settings.cpp
                       exercises/noteIdentification.cpp
                       exercises/exercise.cpp
                       midi/midiController.cpp

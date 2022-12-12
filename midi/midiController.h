@@ -6,20 +6,24 @@
 #include "midi/note.h"
 #include <cstdlib>
 #include <iostream>
-#include <rtmidi/RtMidi.h>
 #include <queue>
+#include <rtmidi/RtMidi.h>
+#include <vector>
 class MidiController {
 
 public:
-  static void Connect(int port);
-  static void Init();
-  static bool getMessage(MidiMessage& message);
-  static Exercise* currExercise;
+   void Connect(int port);
+
+  static Exercise *currExercise;
+ static MidiController *GetInstance();
+ std::vector<std::string> getDevices();
 
 private:
-  static std::queue<MidiMessage> messages;
-  static RtMidiIn *rtmidiin;
-  static std::string lookup;
+  MidiController();
+  static MidiController *_instance;
+  std::queue<MidiMessage> messages;
+  RtMidiIn *rtmidiin;
+  std::string lookup;
   static void midi_event_handler(double deltatime,
                                  std::vector<unsigned char> *message,
                                  void *userData);

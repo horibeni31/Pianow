@@ -3,30 +3,44 @@
 #include "exercises/noteIdentification.h"
 #include "midi/midiMessage.h"
 #include "midi/note.h"
+#include <algorithm>
 #include <iostream>
+#include <qpushbutton.h>
 #include <queue>
 #include <rtmidi/RtMidi.h>
+#include <sys/types.h>
+#include <vector>
 
-RtMidiIn *MidiController::rtmidiin;
-std::queue<MidiMessage> MidiController::messages;
-std::string MidiController::lookup;
+MidiController *MidiController::_instance;
 
 Exercise *MidiController::currExercise;
-void MidiController::Init() {
+
+MidiController *MidiController::GetInstance() {
+
+  if (_instance == nullptr) {
+    _instance = new MidiController();
+  }
+  return _instance;
+}
+
+MidiController::MidiController() {
   rtmidiin = new RtMidiIn();
   messages = std::queue<MidiMessage>();
   lookup = "aAbcCdDefFgG";
   currExercise = nullptr;
+  rtmidiin->setCallback(&midi_event_handler);
+  rtmidiin->ignoreTypes(false, true, true);
 }
 
 void MidiController::Connect(int port) {
-  if(rtmidiin->getPortCount()>0){
+  if (rtmidiin->isPortOpen()) {
+    rtmidiin->closePort();
+  }
+  if (rtmidiin->getPortCount() > 0) {
 
-  rtmidiin->openPort(port);
-  rtmidiin->ignoreTypes(false, true, true);
-  rtmidiin->setCallback(&midi_event_handler);
-  }else {
-  std::cout<<"No midi device found."<<std::endl;
+    rtmidiin->openPort(port);
+  } else {
+    std::cout << "No midi device found." << std::endl;
   }
 }
 void MidiController::midi_event_handler(double deltatime,
@@ -44,13 +58,12 @@ void MidiController::midi_event_handler(double deltatime,
   }
 }
 
-bool MidiController::getMessage(MidiMessage &message) {
-  if (messages.size() > 0) {
-    message = messages.front();
+std::vector<std::string> MidiController::getDevices() {
 
-    messages.pop();
-    return true;
-  } else {
-    return false;
+  std::vector<std::string> ret;
+  for (int i = 0; i < rtmidiin->getPortCount(); i++) {
+
+    ret.push_back(rtmidiin->getPortName(i));
   }
+  return ret;
 }
