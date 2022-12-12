@@ -12,11 +12,11 @@
 class MidiController {
 
 public:
-   void Connect(int port);
+  void Connect(int port);
 
   static Exercise *currExercise;
- static MidiController *GetInstance();
- std::vector<std::string> getDevices();
+  static MidiController *GetInstance();
+  std::vector<std::string> getDevices();
 
 private:
   MidiController();

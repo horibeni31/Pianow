@@ -12,22 +12,26 @@
 #include <qwindowdefs.h>
 MainWindow::MainWindow() {
 
-  this->_btn_exit = new QPushButton("exit", this);
+  this->exercise = nullptr;
+  this->settings = new Settings();
 
-  this->_btn_note_identification = new QPushButton("Note Identification", this);
-  this->_btn_chord_identification =
+  MidiController::GetInstance()->Connect(0);
+  create_menu();
+  setCentralWidget(groupBox);
+}
+void MainWindow::create_menu() {
+  this->groupBox = new QGroupBox();
+
+  QPushButton *_btn_exit = new QPushButton("exit", this);
+
+  QPushButton *_btn_note_identification =
+      new QPushButton("Note Identification", this);
+  QPushButton *_btn_chord_identification =
       new QPushButton("Chord Identification", this);
-
-  this->_btn_settings = new QPushButton("Settings", this);
-
-  this->_btn_keySigniture_identification =
+  QPushButton *_btn_settings = new QPushButton("Settings", this);
+  QPushButton *_btn_keySigniture_identification =
       new QPushButton("Key signiture Identification", this);
 
-  this->exercise = nullptr;
-  this->groupBox = new QGroupBox();
-  std::cout << "asd" << std::endl;
-  this->settings = new Settings();
-  std::cout << "asd" << std::endl;
   _btn_chord_identification->setEnabled(false);
   _btn_keySigniture_identification->setEnabled(false);
 
@@ -39,12 +43,10 @@ MainWindow::MainWindow() {
   layout->addWidget(_btn_exit);
   groupBox->setLayout(layout);
   groupBox->setContentsMargins(100, 100, 100, 100);
-  MidiController::GetInstance()->Connect(0); // TODO
-  setCentralWidget(groupBox);
+
   connect(_btn_exit, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
   connect(_btn_note_identification, SIGNAL(clicked()), this,
           SLOT(show_exercise_note_identification()));
-  
   connect(_btn_settings, SIGNAL(clicked()), this, SLOT(show_settings()));
   ;
 }

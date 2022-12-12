@@ -20,14 +20,11 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 private:
   MidiController *midiController;
-  QPushButton *_btn_note_identification;
-  QPushButton *_btn_chord_identification;
-  QPushButton *_btn_keySigniture_identification;
-  QPushButton *_btn_exit;
-  QPushButton *_btn_settings;
+
   NoteIdentification *exercise;
-  Settings* settings;
-  QGroupBox* groupBox;
+  Settings *settings;
+  QGroupBox *groupBox;
+  void create_menu();
 
 public:
   MainWindow();

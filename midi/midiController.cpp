@@ -36,7 +36,7 @@ void MidiController::Connect(int port) {
   if (rtmidiin->isPortOpen()) {
     rtmidiin->closePort();
   }
-  if (rtmidiin->getPortCount() > 0) {
+  if (rtmidiin->getPortCount() > port) {
 
     rtmidiin->openPort(port);
   } else {
