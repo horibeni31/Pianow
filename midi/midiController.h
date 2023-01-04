@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <queue>
-#include <rtmidi/RtMidi.h>
+#include <RtMidi.h>
 #include <vector>
 class MidiController {
 

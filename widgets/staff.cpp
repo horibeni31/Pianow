@@ -2,7 +2,7 @@
 #include "midi/note.h"
 #include <algorithm>
 #include <iostream>
-#include <pstl/glue_algorithm_defs.h>
+
 #include <qbrush.h>
 #include <qcolor.h>
 #include <qevent.h>

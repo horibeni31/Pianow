@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <qapplication.h>
 #include <signal.h>
-#include "rtmidi/RtMidi.h"
-#include<unistd.h>  
+#include "RtMidi.h"
+
 #include <QApplication>
 #include "exercises/noteIdentification.h"
 #include "widgets/mainWindow.h"

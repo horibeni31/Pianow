@@ -19,9 +19,6 @@ configure_file("treble.png" "treble.png" COPYONLY)
 
 
 
-
-
-
 add_subdirectory(rtmidi)
 add_executable(Pianow main.cpp
                       widgets/mainWindow.cpp

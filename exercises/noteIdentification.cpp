@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
-#include <pstl/glue_algorithm_defs.h>
+
 #include <qcolor.h>
 #include <qdialog.h>
 #include <qmainwindow.h>
