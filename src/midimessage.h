@@ -1,7 +1,7 @@
 #ifndef MIDI_MESSAGE_H
 #define MIDI_MESSAGE_H
 
-#include "midi/note.h"
+#include "src/note.h"
 #include <cstddef>
 struct  MidiMessage{
     Note note;

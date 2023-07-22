@@ -3,7 +3,10 @@
 
 #include "midi/midiMessage.h"
 #include "widgets/staff.h"
-class  Exercise{
+
+#include <QDialog>
+class  Exercise : public QDialog{
+  Q_OBJECT
     protected:
       Staff* staff;
     public:

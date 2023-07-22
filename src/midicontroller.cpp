@@ -1,8 +1,5 @@
-#include "midiController.h"
-#include "exercises/exercise.h"
-#include "exercises/noteIdentification.h"
-#include "midi/midiMessage.h"
-#include "midi/note.h"
+#include "src/midicontroller.h"
+#include "src/midimessage.h"
 #include <algorithm>
 #include <iostream>
 #include <qpushbutton.h>
@@ -13,7 +10,7 @@
 
 MidiController *MidiController::_instance;
 
-Exercise *MidiController::currExercise;
+//Exercise *MidiController::currExercise;
 
 MidiController *MidiController::GetInstance() {
 
@@ -27,7 +24,6 @@ MidiController::MidiController() {
   rtmidiin = new RtMidiIn();
   messages = std::queue<MidiMessage>();
   lookup = "aAbcCdDefFgG";
-  currExercise = nullptr;
   rtmidiin->setCallback(&midi_event_handler);
   rtmidiin->ignoreTypes(false, true, true);
 }
@@ -43,6 +39,10 @@ void MidiController::Connect(int port) {
     std::cout << "No midi device found." << std::endl;
   }
 }
+void MidiController::onMidiEvent(const MidiMessage& message)
+{
+  emit midiEvent(message);
+}
 void MidiController::midi_event_handler(double deltatime,
                                         std::vector<unsigned char> *message,
                                         void *userData) {
@@ -51,10 +51,11 @@ void MidiController::midi_event_handler(double deltatime,
     int key = message->at(1);
 
     bool pressed = message->at(2) != 0;
-    if (currExercise) {
+    // if (currExercise) {
 
-      currExercise->HandleMidiMessage(MidiMessage(Note::getNote(key), pressed));
-    }
+    //   currExercise->HandleMidiMessage(MidiMessage(Note::getNote(key), pressed));
+    // }
+    MidiController::GetInstance()->onMidiEvent(MidiMessage(Note::getNote(key), pressed));
   }
 }
 

@@ -6,6 +6,7 @@ A piano learning app
 ## Installing
 ### Linux
 ```
+git submoudle update --init --recursive
 mkdir build
 cd build
 cmake ..
