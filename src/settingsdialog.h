@@ -15,9 +15,8 @@ private:
 public:
   SettingsDialog(QWidget *parent = nullptr);
   ~SettingsDialog();
+  void accept() override;
 
-private slots:
-  void device_selection_changed(int index);
 };
 
 #endif

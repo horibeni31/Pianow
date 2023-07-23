@@ -18,6 +18,8 @@ endif()
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 add_executable(Pianow
+  src/settings.cpp
+  src/settings.h
   src/settingsdialog.cpp
   src/settingsdialog.h
   src/settingsdialog.ui

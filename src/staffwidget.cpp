@@ -21,7 +21,6 @@ StaffWidget::StaffWidget(QWidget *parent)
     : QWidget(parent), _ui(new Ui::StaffWidget()) {
   _ui->setupUi(this);
 MidiController* instance = MidiController::GetInstance();
-  // pressedNotes = std::vector<Note>();
   connect(instance,&MidiController::midiEvent,this,&StaffWidget::onMidiEvent);
 }
 StaffWidget::~StaffWidget() { delete _ui; }
@@ -41,9 +40,9 @@ void StaffWidget::paintEvent(QPaintEvent *event) {
 
   painter.setPen(Qt::NoPen);
   painter.setBrush(QBrush(Qt::black, Qt::SolidPattern));
-  // draw fix notes
-  // for (int i = 0; i < fixNotes.size(); i++)
-  //   drawNote(fixNotes[i], painter);
+  //draw fix notes
+  for (int i = 0; i < fixNotes.size(); i++)
+    drawNote(fixNotes[i], painter);
 
   //   // draw pressed notes
   for (int i = 0; i < pressedNotes.size(); i++) {
@@ -78,10 +77,9 @@ void StaffWidget::drawNote(Note n, QPainter &painter) {
 void StaffWidget::resizeEvent(QResizeEvent *event) {
   startx = 10;
   starty = 10;
-  gap = 10;
+  gap = geometry().height()/12;
   middleCpos = starty + 4 * gap + gap * 0.5;
-  width = 300;
-  // todo responsive
+  width = geometry().width();
 
   update();
 }
@@ -99,18 +97,15 @@ void StaffWidget::AddNote(Note n, bool fixed) {
   } else {
     this->fixNotes.push_back(n);
   }
-  // drawStaff();
   update();
 }
 void StaffWidget::RemoveNote(Note n, bool fixed) {
   if (!fixed) {
-
     this->pressedNotes.erase(
         std::find(pressedNotes.begin(), pressedNotes.end(), n));
   } else {
     this->fixNotes.erase(std::find(fixNotes.begin(), fixNotes.end(), n));
   }
 
-  // drawStaff();
   update();
 }

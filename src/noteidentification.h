@@ -1,5 +1,7 @@
 #ifndef NOTE_IDENTIFICATION_H
 #define NOTE_IDENTIFICATION_H
+#include "midimessage.h"
+#include "note.h"
 #include <QDialog>
 #include <QMainWindow>
 #include <QObject>
@@ -14,13 +16,16 @@ namespace Ui {
 }
 class NoteIdentification :  public QDialog {
 private:
-  QPushButton *button;
+  
  Ui::NoteIdentification* _ui;
+ Note _goal;
 public:
   NoteIdentification(QWidget* parent = nullptr);
   ~NoteIdentification();
-  //oid HandleMidiMessage(MidiMessage m) override;
-  //Note GenerateRandomNote();
+  
+private slots:
+  void onMidiEvent(const MidiMessage& message);
+
 };
 
 #endif

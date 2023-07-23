@@ -1,4 +1,6 @@
 #include "src/noteidentification.h"
+#include "midicontroller.h"
+#include "note.h"
 #include "ui_noteidentification.h"
 
 #include <QImage>
@@ -8,6 +10,7 @@
 #include <cstdlib>
 #include <iostream>
 
+#include <QLayout>
 #include <qboxlayout.h>
 #include <qcolor.h>
 #include <qdialog.h>
@@ -17,50 +20,25 @@
 #include <qpoint.h>
 #include <qwidget.h>
 #include <qwindowdefs.h>
+#include <stdlib.h>
 #include <string>
 #include <thread>
 #include <vector>
-#include <stdlib.h>
-#include <QLayout>
-NoteIdentification::NoteIdentification(QWidget* parent)
-    :QDialog(parent),_ui(new Ui::NoteIdentification()) {
-  // this->button = new QPushButton("Hello there");
-  // Form* f = new Form();
-  // this->setLayout(new QVBoxLayout(this));
-  // this->layout()->addWidget(f);
-  // this->layout()->addWidget(new Staff(this));
-  // srand(time(0));
-  // //  this->setCentralWidget(image);
-  // this->goal = GenerateRandomNote();
-  // staff->AddNote(goal,true);
-
-  // resize(500, 500);
+NoteIdentification::NoteIdentification(QWidget *parent)
+    : QDialog(parent), _ui(new Ui::NoteIdentification()) {
   _ui->setupUi(this);
+  connect(MidiController::GetInstance(), &MidiController::midiEvent, this,
+          &NoteIdentification::onMidiEvent);
+  _goal = Note::getRandom();
+  _ui->staff->AddNote(_goal,true);
 }
-NoteIdentification::~NoteIdentification(){
-  delete _ui;
+NoteIdentification::~NoteIdentification() { delete _ui; }
+
+void NoteIdentification::onMidiEvent(const MidiMessage &message) {
+  Note n = message.note;
+  if (n == _goal) {
+    _ui->staff->RemoveNote(_goal, true);
+    _goal = Note::getRandom();
+    _ui->staff->AddNote(_goal, true);
+  }
 }
-
-// void NoteIdentification::HandleMidiMessage(MidiMessage m) {
-//   if (m.pressed) {
-//     std::cout << m.note.pitch << "," << m.note.accidental << ","
-//               << m.note.octave << std::endl;
-//     this->staff->AddNote(m.note);
-    
-
-//   } else {
-//     this->staff->RemoveNote(m.note);
-//     if(m.note == goal){
-//       this->staff->RemoveNote(goal,true);
-//       this->goal = GenerateRandomNote();
-//       this->staff->AddNote(goal,true);
-//     }
-//     // pressedNotes.erase(std::remove(pressedNotes.begin(),pressedNotes.end(),m.note));
-//   }
-//   // std::cout << m.note.octave << ", " << m.note.pitch << std::endl;
-// }
-
-// Note NoteIdentification::GenerateRandomNote(){
-//   Note n = Note((Pitch)(rand()%7),4,Accidental::NORMAL); 
-//     return n;
-// }

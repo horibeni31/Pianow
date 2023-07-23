@@ -25,3 +25,8 @@ Note Note::getNote(int midiId) {
       (int)(lookup[midiId % 12]) < 97 ? Accidental::SHARP : Accidental::NORMAL;
   return note;
 }
+Note Note::getRandom(){
+
+  return Note((Pitch)(rand()%7),4,Accidental::NORMAL); 
+
+}

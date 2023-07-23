@@ -17,6 +17,7 @@ struct Note{
  Note(){};
  bool operator==(const Note& other);
  static Note getNote(int i);
+ static Note getRandom();
 };
 
 
