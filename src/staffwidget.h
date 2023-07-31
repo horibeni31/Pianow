@@ -1,6 +1,7 @@
 #ifndef STAFF_H
 #define STAFF_H
 #include "src/midimessage.h"
+#include <qnamespace.h>
 namespace Ui {
 class StaffWidget;
 }
@@ -21,18 +22,16 @@ public:
 protected:
   void paintEvent(QPaintEvent *event) override;
   void resizeEvent(QResizeEvent *event) override;
-  void drawNote(Note n, QPainter &painter);
+  void drawNote(Note n, QPainter &painter,Qt::GlobalColor color = Qt::black);
 private slots:
   void onMidiEvent(const MidiMessage &message);
 
 private:
-  int startx;
-  int starty;
-  int gap;
-  int middleCpos;
-  int width;
-  // QImage treble;
-  // QImage bass;
+  int _gap;
+  int _staffHeight;
+
+  QImage treble;
+  QImage bass;
   std::vector<Note> pressedNotes;
   std::vector<Note> fixNotes;
 

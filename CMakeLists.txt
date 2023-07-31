@@ -39,10 +39,10 @@ add_executable(Pianow
   src/noteidentification.cpp
   src/noteidentification.h
   src/noteidentification.ui
-
+  resources.qrc
 )
 target_include_directories(Pianow PUBLIC src)
 
 target_link_libraries(Pianow Qt5::Widgets rtmidi)
-
+install(TARGETS Pianow DESTINATION bin)
 

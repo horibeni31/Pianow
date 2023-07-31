@@ -1,6 +1,6 @@
 #include "src/staffwidget.h"
-#include "midimessage.h"
 #include "midicontroller.h"
+#include "midimessage.h"
 #include "ui_staffwidget.h"
 #include <algorithm>
 #include <iostream>
@@ -20,71 +20,90 @@
 StaffWidget::StaffWidget(QWidget *parent)
     : QWidget(parent), _ui(new Ui::StaffWidget()) {
   _ui->setupUi(this);
-MidiController* instance = MidiController::GetInstance();
-  connect(instance,&MidiController::midiEvent,this,&StaffWidget::onMidiEvent);
+  MidiController *instance = MidiController::GetInstance();
+  connect(instance, &MidiController::midiEvent, this,
+          &StaffWidget::onMidiEvent);
+  this->treble = QImage(":/resources/treble.png");
+  this->bass = QImage(":/resources/bass.png");
 }
 StaffWidget::~StaffWidget() { delete _ui; }
 void StaffWidget::paintEvent(QPaintEvent *event) {
-
   QPainter painter(this);
-  // painter.drawImage(QRect(startx, starty - gap / 2, gap * 2, gap * 6),
-  // treble); painter.drawImage(QRect(startx, starty + gap * 6, gap * 2, gap
-  // * 3.5), bass);
-
+  int starty = 7 * _gap / 2 * 3 - _gap;
+  painter.drawImage(QRect(0, starty-_gap, _gap * 2, _gap * 6), treble);
+  painter.drawImage(QRect(0, starty+_gap * 6, _gap * 2, _gap * 3.5), bass);
   for (int i = 0; i < 11; i++) {
-    if (i == 5)
+    if (i == 5) // skip line for middle c
       continue;
-    painter.drawLine(startx, starty + gap * i, startx + width,
-                     starty + gap * i);
+    painter.drawLine(0, starty + _gap * i, geometry().width(),
+                     starty + _gap * i);
   }
 
   painter.setPen(Qt::NoPen);
   painter.setBrush(QBrush(Qt::black, Qt::SolidPattern));
-  //draw fix notes
+  // draw fix notes
   for (int i = 0; i < fixNotes.size(); i++)
     drawNote(fixNotes[i], painter);
 
-  //   // draw pressed notes
+  // draw pressed notes
   for (int i = 0; i < pressedNotes.size(); i++) {
     if (std::find(fixNotes.begin(), fixNotes.end(), pressedNotes[i]) !=
         fixNotes.end()) {
-      painter.setBrush(QBrush(Qt::green, Qt::SolidPattern));
+      drawNote(pressedNotes[i], painter, Qt::green);
     } else {
-      painter.setBrush(QBrush(Qt::red, Qt::SolidPattern));
+      drawNote(pressedNotes[i], painter, Qt::red);
     }
-    drawNote(pressedNotes[i], painter);
   }
-  // }
 }
 
-void StaffWidget::drawNote(Note n, QPainter &painter) {
-  int notePos =
-      middleCpos - (n.pitch * gap * 0.5 + (n.octave - 4) * 7 * gap * 0.5);
-  painter.setPen(QPen(Qt::black));
-  painter.drawLine(startx + gap * 4 + gap, notePos + gap,
-                   startx + gap * 4 + gap, notePos + gap - 3 * gap);
+void StaffWidget::drawNote(Note n, QPainter &painter, Qt::GlobalColor color) {
+  int middleCpos = 14 * _gap;
+  int notePos = _staffHeight - (n.pitch * _gap / 2 + n.octave * 7 * _gap / 2);
+
+  painter.setPen(QPen(Qt::black, _gap / 10));
+  painter.drawLine(_gap * 4 + _gap * 1.2 - _gap / 20, notePos + _gap / 2,
+                   _gap * 4 + _gap * 1.2 - _gap / 20,
+                   notePos + _gap - 3 * _gap);
 
   painter.setPen(Qt::NoPen);
-  painter.setBrush(QBrush(Qt::black, Qt::SolidPattern));
-  painter.drawEllipse(startx + gap * 4, notePos, gap, gap);
-  if (n.accidental == Accidental::SHARP) {
-    painter.drawText(startx + gap * 4 - gap, notePos + gap, "#");
+  painter.setBrush(QBrush(color, Qt::SolidPattern));
+  painter.drawEllipse(_gap * 4, notePos, 1.2 * _gap, _gap);
+  painter.setPen(Qt::PenStyle::SolidLine);
+  QFont font;
+  font.setPixelSize(_gap);
+  painter.setFont(font);
+  if (n.accidental == Accidental::SHARP)
+    painter.drawText(_gap * 4 - _gap, notePos + _gap, "#");
+  if (n.accidental == Accidental::FLAT)
+    painter.drawText(_gap * 4 - _gap, notePos + _gap, "b");
+
+  // draw lower ledger lines
+  for (int i = middleCpos + 6 * _gap; i <= notePos; i += _gap) {
+
+    painter.drawLine(_gap * 4 - _gap / 2, i + _gap / 2,
+                     +_gap * 4 + 3 * _gap / 2, i + _gap / 2);
   }
-  if (n.accidental == Accidental::FLAT) {
-    painter.drawText(startx + gap * 4 - gap, notePos + gap, "b");
+  // draw upper ledger lines
+  for (int i = middleCpos - 6 * _gap; i >= notePos; i -= _gap) {
+
+    painter.drawLine(_gap * 4 - _gap / 2, i + _gap / 2, _gap * 4 + 3 * _gap / 2,
+                     i + _gap / 2);
   }
+  // // draw ledger line for middle c
+  if (notePos == middleCpos)
+    painter.drawLine(_gap * 4 - _gap / 2, middleCpos + _gap / 2,
+                     _gap * 4 + 3 * _gap / 2, middleCpos + _gap / 2);
 }
 void StaffWidget::resizeEvent(QResizeEvent *event) {
-  startx = 10;
-  starty = 10;
-  gap = geometry().height()/12;
-  middleCpos = starty + 4 * gap + gap * 0.5;
-  width = geometry().width();
+  _gap = geometry().height() / (7 * 8 / 2); // 52 white keys
+  _staffHeight = (7 * 8) * _gap / 2;        // 52 white keys
 
   update();
 }
 void StaffWidget::onMidiEvent(const MidiMessage &message) {
   if (message.pressed) {
+      std::cout << message.note.getStr().toStdString() << std::endl;
+
     AddNote(message.note);
   } else {
     RemoveNote(message.note);

@@ -30,15 +30,26 @@ NoteIdentification::NoteIdentification(QWidget *parent)
   connect(MidiController::GetInstance(), &MidiController::midiEvent, this,
           &NoteIdentification::onMidiEvent);
   _goal = Note::getRandom();
+      _ui->lblGoal->setText(_goal.getStr());
+
   _ui->staff->AddNote(_goal,true);
 }
 NoteIdentification::~NoteIdentification() { delete _ui; }
 
 void NoteIdentification::onMidiEvent(const MidiMessage &message) {
   Note n = message.note;
+  if(!message.pressed){
+
   if (n == _goal) {
     _ui->staff->RemoveNote(_goal, true);
     _goal = Note::getRandom();
+    _ui->lblGoal->setText(_goal.getStr());
     _ui->staff->AddNote(_goal, true);
+    success++;
+    _ui->lblPassed->setText(QString("Success:  %1").arg(success));
+  }else {
+    error++;
+    _ui->lblError->setText(QString("Error:  %1").arg(error));
+  }
   }
 }

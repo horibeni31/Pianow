@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>resources/bass.png</file>
+    <file>resources/treble.png</file>
+</qresource>
+</RCC>

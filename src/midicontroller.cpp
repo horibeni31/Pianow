@@ -10,8 +10,6 @@
 
 MidiController *MidiController::_instance;
 
-//Exercise *MidiController::currExercise;
-
 MidiController *MidiController::GetInstance() {
 
   if (_instance == nullptr) {
@@ -51,10 +49,7 @@ void MidiController::midi_event_handler(double deltatime,
     int key = message->at(1);
 
     bool pressed = message->at(2) != 0;
-    // if (currExercise) {
-
-    //   currExercise->HandleMidiMessage(MidiMessage(Note::getNote(key), pressed));
-    // }
+  
     MidiController::GetInstance()->onMidiEvent(MidiMessage(Note::getNote(key), pressed));
   }
 }

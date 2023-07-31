@@ -19,14 +19,51 @@ Note Note::getNote(int midiId) {
   std::string lookup = "cCdDefFgGaAb";
   std::string pitchLookup = "CDEFGAB";
   char p = lookup[midiId % 12];
-  std::cout << p << std::endl;
   note.pitch = (Pitch)(pitchLookup.find(std::toupper(p)));
   note.accidental =
       (int)(lookup[midiId % 12]) < 97 ? Accidental::SHARP : Accidental::NORMAL;
   return note;
 }
-Note Note::getRandom(){
+Note Note::getRandom() {
 
-  return Note((Pitch)(rand()%7),4,Accidental::NORMAL); 
+  return Note((Pitch)(rand() % 7), 4, Accidental::NORMAL);
+}
+QString Note::getStr() const {
+  QString ret;
+  switch (pitch) {
 
+  case C:
+    ret += "C";
+    break;
+  case D:
+    ret += "D";
+    break;
+  case E:
+    ret += "E";
+    break;
+  case F:
+    ret += "F";
+    break;
+  case G:
+    ret += "G";
+    break;
+  case A:
+    ret += "A";
+    break;
+  case B:
+    ret += "B";
+    break;
+  }
+  switch (accidental) {
+  case FLAT:
+    ret += "b";
+    break;
+  case SHARP:
+    ret += "#";
+    break;
+  case NORMAL:
+  default:
+    break;
+  }
+  return ret + std::to_string(octave).c_str();
 }
