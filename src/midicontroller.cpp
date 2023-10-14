@@ -4,7 +4,7 @@
 #include <iostream>
 #include <qpushbutton.h>
 #include <queue>
-#include <RtMidi.h>
+#include <rtmidi/RtMidi.h>
 #include <sys/types.h>
 #include <vector>
 

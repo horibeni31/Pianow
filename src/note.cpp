@@ -26,7 +26,7 @@ Note Note::getNote(int midiId) {
 }
 Note Note::getRandom() {
 
-  return Note((Pitch)(rand() % 7), 4, Accidental::NORMAL);
+  return Note((Pitch)(rand() % 7), 2+rand() %4, Accidental::NORMAL);
 }
 QString Note::getStr() const {
   QString ret;

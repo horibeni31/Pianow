@@ -6,43 +6,45 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BUILD_TESTING off)
-add_subdirectory(rtmidi)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
-set(CMAKE_PREFIX_PATH "/usr/bin")
 if(CMAKE_VERSION VERSION_LESS "3.7.0")
   set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
-add_executable(Pianow
-  src/settings.cpp
-  src/settings.h
-  src/settingsdialog.cpp
-  src/settingsdialog.h
-  src/settingsdialog.ui
-  src/staffwidget.cpp
-  src/staffwidget.h
-  src/staffwidget.ui
-  src/main.cpp
-  src/mainwindow.cpp
-  src/mainwindow.h
-  src/mainwindow.ui
-  src/midicontroller.cpp
-  src/midicontroller.h
-  src/midimessage.cpp
-  src/midimessage.h
-  src/note.cpp
-  src/note.h
-  src/noteidentification.cpp
-  src/noteidentification.h
-  src/noteidentification.ui
-  resources.qrc
+set(SRC_FILES
+  exerciseresult.h
+  settings.cpp
+  settings.h
+  settingsdialog.cpp
+  settingsdialog.h
+  settingsdialog.ui
+  staffwidget.cpp
+  staffwidget.h
+  staffwidget.ui
+  main.cpp
+  mainwindow.cpp
+  mainwindow.h
+  mainwindow.ui
+  midicontroller.cpp
+  midicontroller.h
+  midimessage.cpp
+  midimessage.h
+  note.cpp
+  note.h
+  noteidentification.cpp
+  noteidentification.h
+  noteidentification.ui
 )
+list(TRANSFORM SRC_FILES PREPEND "src/")
+add_executable(Pianow ${SRC_FILES} resources.qrc)
 target_include_directories(Pianow PUBLIC src)
+find_package(nlohmann_json 3.11.2 REQUIRED)
 
-target_link_libraries(Pianow Qt5::Widgets rtmidi)
+target_link_libraries(Pianow Qt5::Widgets rtmidi nlohmann_json::nlohmann_json)
+
 install(TARGETS Pianow DESTINATION bin)
 

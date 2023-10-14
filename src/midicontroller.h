@@ -7,7 +7,7 @@
 #include <qobjectdefs.h>
 #include <QObject>
 #include <queue>
-#include <RtMidi.h>
+#include <rtmidi/RtMidi.h>
 #include <vector>
 #include <queue>
 
