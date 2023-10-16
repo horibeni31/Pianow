@@ -49,7 +49,6 @@ void MidiController::midi_event_handler(double deltatime,
     int key = message->at(1);
 
     bool pressed = message->at(2) != 0;
-  
     MidiController::GetInstance()->onMidiEvent(MidiMessage(Note::getNote(key), pressed));
   }
 }

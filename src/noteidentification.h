@@ -10,9 +10,10 @@
 #include <QPushButton>
 #include <cstddef>
 #include <vector>
-
+#include <memory>
 #include "midimessage.h"
 #include "note.h"
+#include <QTimer>
 namespace Ui
 {
 class NoteIdentification;
@@ -26,6 +27,8 @@ class NoteIdentification : public QDialog
     int time;
     int _currentTime;
     int _currentGoalIndex = 0;
+    std::unique_ptr<QTimer> _timer ;
+
   public:
     NoteIdentification(QWidget* parent = nullptr);
     ~NoteIdentification();

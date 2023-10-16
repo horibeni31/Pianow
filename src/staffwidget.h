@@ -20,6 +20,7 @@ class StaffWidget : public QWidget
     StaffWidget(QWidget* parent = nullptr);
     ~StaffWidget();
     void increaseCursorPosition();
+    void resetCursor();
     void AddNote(Note n, bool fixed = false);
     void RemoveNote(Note n, bool fixed = false);
 

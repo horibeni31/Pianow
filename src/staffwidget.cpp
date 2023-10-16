@@ -55,11 +55,11 @@ void StaffWidget::paintEvent(QPaintEvent* event)
     {
         if (std::find(fixNotes.begin(), fixNotes.end(), pressedNotes[i]) != fixNotes.end())
         {
-            drawNote(pressedNotes[i], painter, Qt::green, _cursorPosition*2);
+            drawNote(pressedNotes[i], painter, Qt::green, _cursorPosition * 2);
         }
         else
         {
-            drawNote(pressedNotes[i], painter, Qt::red, _cursorPosition*2);
+            drawNote(pressedNotes[i], painter, Qt::red, _cursorPosition * 2);
         }
     }
 }
@@ -154,4 +154,8 @@ void StaffWidget::RemoveNote(Note n, bool fixed)
 void StaffWidget::increaseCursorPosition()
 {
     _cursorPosition++;
+}
+void StaffWidget::resetCursor()
+{
+    _cursorPosition = 0;
 }
