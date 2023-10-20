@@ -20,7 +20,8 @@ jobs:
     steps:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3.3.0
-            
+    - name: Install dependencies
+      run: sudo apt-get install libasound2-dev
     - uses: actions/checkout@v3
     - name: Init
       run: git submodule update --init
