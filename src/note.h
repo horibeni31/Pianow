@@ -4,13 +4,13 @@
 #include <QString>
 #include <nlohmann/json.hpp>
 
-enum Accidental
+enum class Accidental
 {
     FLAT,
     SHARP,
     NORMAL
 };
-enum Pitch
+enum class Pitch
 {
 
     C,

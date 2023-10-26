@@ -32,36 +32,36 @@ QString Note::getStr() const {
   QString ret;
   switch (pitch) {
 
-  case C:
+  case Pitch::C:
     ret += "C";
     break;
-  case D:
+  case Pitch::D:
     ret += "D";
     break;
-  case E:
+  case Pitch::E:
     ret += "E";
     break;
-  case F:
+  case Pitch::F:
     ret += "F";
     break;
-  case G:
+  case Pitch::G:
     ret += "G";
     break;
-  case A:
+  case Pitch::A:
     ret += "A";
     break;
-  case B:
+  case Pitch::B:
     ret += "B";
     break;
   }
   switch (accidental) {
-  case FLAT:
+  case Accidental::FLAT:
     ret += "b";
     break;
-  case SHARP:
+  case Accidental::SHARP:
     ret += "#";
     break;
-  case NORMAL:
+  case Accidental::NORMAL:
   default:
     break;
   }

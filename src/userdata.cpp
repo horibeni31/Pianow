@@ -1,5 +1,6 @@
 #include "userdata.h"
 
+#include <qobject.h>
 #include <qsqldatabase.h>
 #include <qsqlquery.h>
 #include <qstandardpaths.h>
@@ -36,7 +37,7 @@ void UserData::InsertResult(const ExerciseResult& res)
         QSqlQuery query;
         query.prepare("INSERT INTO notes"
                       " (:note, :tries, :time)");
-        query.bindValue(":note",4);
+        query.bindValue(":note", pitch);
     }
 }
 
@@ -54,27 +55,48 @@ UserData::UserData()
 void UserData::createDB()
 {
     QString path =
-        QString("%1/%2").arg(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[0]).arg(dbName);
-    if (QDir().exists(path))
-        return;
-    QDir().mkpath(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[0]);
-    std::cout << "db saved to " << path.toStdString() << std::endl;
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");  // not dbConnection
+        // QString("%1/%2").arg(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[0]).arg(dbName);
+        QString("%1").arg(dbName);
+    // if (QDir().exists(path))
+    //     return;
+    // QDir().mkpath(QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[0]);
+    // std::cout << "db saved to " << path.toStdString() << std::endl;
+    // QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
 
-    db.setDatabaseName(path);
-    db.open();
+    // db.setDatabaseName(path);
+    // db.open();
 
-    db.exec("create table result "
-            "(id datetime primary key, "
-            "noteId integer, "
-            "tries integer, "
-            "time integer)");
-    auto a = db.exec("create table note "
-                     "(keyIndex integer primary key, "
-                     "letter varchar, "
-                     "octave integer, "
-                     "accidental integer)");
-    std::cout << a.lastError().text().toStdString() << std::endl;
+    // db.exec("create table result "
+    //         "(id datetime primary key, "
+    //         "noteId integer, "
+    //         "tries integer, "
+    //         "time integer)");
+    // auto a = db.exec("create table note "
+    //                  "(id integer primary key, "
+    //                  "letter varchar, "
+    //                  "octave integer, "
+    //                  "accidental integer)");
+    // std::cout << a.lastError().text().toStdString() << std::endl;
+    int octave = 0;
+    int note = 5;
 
-    db.commit();
+    int keys = 0;
+    while (keys < 88)
+    {
+        std::cout <<keys<<": "<< Note((Pitch)note, octave, Accidental::NORMAL).getStr().toStdString() << std::endl;
+        keys++;
+        if (note != 2 && note != 6 && keys<88)
+        {
+            std::cout <<keys<<": "<< Note((Pitch)note, octave, Accidental::SHARP).getStr().toStdString() << std::endl;
+            keys++;
+        }
+        if(note == 6)
+        {
+            octave++;
+            std::cout<<std::endl;
+        }
+        note = (note + 1) % 7;
+       // octave = (keys+9) / 12;
+    }
+    //db.commit();
 }

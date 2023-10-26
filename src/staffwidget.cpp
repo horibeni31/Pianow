@@ -67,7 +67,7 @@ void StaffWidget::paintEvent(QPaintEvent* event)
 void StaffWidget::drawNote(Note n, QPainter& painter, Qt::GlobalColor color, int position)
 {
     int middleCpos = 14 * _gap;
-    int notePosY = _staffHeight - (n.pitch * _gap / 2 + n.octave * 7 * _gap / 2);
+    int notePosY = _staffHeight - ((int)n.pitch * _gap / 2 + n.octave * 7 * _gap / 2);
     int notePosX = _gap * 4 + position * _gap;
     float noteWidth = 1.2 * _gap;
     float noteHeight = _gap;

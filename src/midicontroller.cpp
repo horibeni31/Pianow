@@ -40,6 +40,7 @@ void MidiController::Connect(int port) {
 void MidiController::onMidiEvent(const MidiMessage& message)
 {
   emit midiEvent(message);
+  std::cout<<message.note.getStr().toStdString()<<std::endl;
 }
 void MidiController::midi_event_handler(double deltatime,
                                         std::vector<unsigned char> *message,
@@ -51,6 +52,7 @@ void MidiController::midi_event_handler(double deltatime,
     bool pressed = message->at(2) != 0;
     MidiController::GetInstance()->onMidiEvent(MidiMessage(Note::getNote(key), pressed));
   }
+
 }
 
 std::vector<std::string> MidiController::getDevices() {
