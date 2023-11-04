@@ -78,25 +78,15 @@ void UserData::createDB()
     //                  "accidental integer)");
     // std::cout << a.lastError().text().toStdString() << std::endl;
     int octave = 0;
-    int note = 5;
+    int note = (int)Pitch::A;
 
     int keys = 0;
+    bool sharp = false;
     while (keys < 88)
     {
-        std::cout <<keys<<": "<< Note((Pitch)note, octave, Accidental::NORMAL).getStr().toStdString() << std::endl;
-        keys++;
-        if (note != 2 && note != 6 && keys<88)
-        {
-            std::cout <<keys<<": "<< Note((Pitch)note, octave, Accidental::SHARP).getStr().toStdString() << std::endl;
-            keys++;
-        }
-        if(note == 6)
-        {
-            octave++;
-            std::cout<<std::endl;
-        }
-        note = (note + 1) % 7;
-       // octave = (keys+9) / 12;
+        Note n = Note::getNote(21 + keys);
+
+        std::cout << "\t\t" << keys << ": " << n.getStr().toStdString() << std::endl;
     }
-    //db.commit();
+    // // db.commit();
 }
